@@ -11,8 +11,14 @@ module.exports = {
     path: path.resolve(__dirname, "public"),
     filename: `js/index.js`,
   },
+  node: {
+    fs: "empty",
+  },
   devServer: {
+    inline: true,
     contentBase: "./dist/",
+    port: 3002,
+    proxy: { "/api/**": { target: "http://localhost:3001", secure: false } },
   },
   optimization: {
     minimizer: [new TerserPlugin(), new OptimizeCssAssetsPlugin()],
