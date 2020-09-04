@@ -1,9 +1,7 @@
 const express = require("express");
-var cors = require("cors");
+const path = require("path");
 const app = express();
 const { cloudinary } = require("./utils/cloudinary");
-
-app.use(cors());
 
 app.get("/api/images", async (req, res) => {
   const { resources } = await cloudinary.search
@@ -18,3 +16,12 @@ const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log(`successfully connected to port ${port}`);
 });
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "frontend/public")));
+  app.get("*", (req, res) => {
+    res.sendfile(path.join((__dirname = "frontend/public/index.html")));
+  });
+}
+
+app.use(express.static("../frontend/public"));
