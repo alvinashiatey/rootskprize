@@ -10,7 +10,7 @@ const d = async () => {
   try {
     const res = await fetch("/api/images");
     const data = await res.json();
-    const imgarray = data.map((image) => {
+    data.map((image) => {
       var tag = cl.imageTag(image);
       console.log(tag);
       let img = document.querySelector(".images");

@@ -18,9 +18,9 @@ app.listen(port, () => {
 });
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "frontend/public")));
+  app.use(express.static(path.join(__dirname, "../frontend/public")));
   app.get("*", (req, res) => {
-    res.sendfile(path.join((__dirname = "frontend/public/index.html")));
+    res.sendfile(path.join((__dirname = "../frontend/public/index.html")));
   });
 }
 
